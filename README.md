@@ -7,4 +7,4 @@
 [**SandboxMain.cpp**](https://github.com/ts-vadim/Game-Engine/blob/main/Sandbox/SandboxMain.cpp)<br>
 
 ## Preview
-<image width="500px" src="https://github.com/ts-vadim/Game-Engine/blob/main/preview.png">
+<image width="600px" src="https://github.com/ts-vadim/Game-Engine/blob/main/preview.png">
