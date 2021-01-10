@@ -8,10 +8,8 @@
 #endif
 
 
-#include <string.h>
-
 #define ENGINE_FUNC_SIG __FUNCTION__ 
-#define ENGINE_FILE_SIG (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
+#define ENGINE_FILE_SIG __FILE__
 #define ENGINE_LINE_SIG __LINE__
 
 
