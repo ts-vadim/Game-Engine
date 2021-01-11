@@ -18,13 +18,18 @@ public:
 
 	void Run()
 	{
-		
 		for (int i = 0; IsRunning(); i++)
 		{
-			if (i % 2)
-				ENGINE_TRACE("running: %d", IsRunning());
-			else
-				ENGINE_CORE_TRACE("running: %d", IsRunning());
+			ENGINE_TRACE(
+				"Time now: %02d-%02d-%04d %02d:%02d:%02d.%04d",
+				Engine::Date::Day(),
+				Engine::Date::Month(),
+				Engine::Date::Year(),
+				Engine::Time::Actual::Hours(),
+				Engine::Time::Actual::Minutes(),
+				Engine::Time::Actual::Seconds(),
+				Engine::Time::Actual::Milliseconds()
+			);
 		}
 	}
 

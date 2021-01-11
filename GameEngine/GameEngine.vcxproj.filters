@@ -8,11 +8,11 @@
     <ClInclude Include="GameEngine\sources\GameEngine\Log\Log.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Time\Timer.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Time\Time.h" />
-    <ClInclude Include="GameEngine\sources\GameEngine\Time\ScopedTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine\sources\GameEngine\Application\Application.cpp" />
     <ClCompile Include="GameEngine\sources\GameEngine\Log\Log.cpp" />
     <ClCompile Include="GameEngine\sources\GameEngine\Time\Timer.cpp" />
+    <ClCompile Include="GameEngine\sources\GameEngine\Time\Time.cpp" />
   </ItemGroup>
 </Project>

@@ -21,17 +21,17 @@ namespace Engine
 
 	void Timer::Reset()
 	{
-		m_StartTimepoint = Time::NowMicros();
+		m_StartTimepoint = Time::Actual::Microseconds();
 	}
 
 	double Timer::GetElapsedTimeSec() const
 	{
-		return (Time::NowMicros() - m_StartTimepoint) / 1000000.0;
+		return (Time::Actual::Microseconds() - m_StartTimepoint) / 1000000.0;
 	}
 
 	double Timer::GetElapsedTimeMs() const
 	{
-		return (Time::NowMicros() - m_StartTimepoint) / 1000.0;
+		return (Time::Actual::Microseconds() - m_StartTimepoint) / 1000.0;
 	}
 
 	const char* Timer::GetName() const

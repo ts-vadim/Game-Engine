@@ -95,13 +95,13 @@
     <ClInclude Include="GameEngine\sources\GameEngine\Core.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\EntryPoint.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Log\Log.h" />
-    <ClInclude Include="GameEngine\sources\GameEngine\Time\ScopedTimer.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Time\Time.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Time\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine\sources\GameEngine\Application\Application.cpp" />
     <ClCompile Include="GameEngine\sources\GameEngine\Log\Log.cpp" />
+    <ClCompile Include="GameEngine\sources\GameEngine\Time\Time.cpp" />
     <ClCompile Include="GameEngine\sources\GameEngine\Time\Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

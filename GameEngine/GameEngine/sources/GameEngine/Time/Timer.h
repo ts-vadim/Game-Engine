@@ -15,10 +15,6 @@ namespace Engine
 
 		void Reset();
 
-		/// <summary>
-		/// Returns elapsed time in seconds
-		/// </summary>
-		/// <returns></returns>
 		double GetElapsedTimeSec() const;
 		double GetElapsedTimeMs() const;
 		const char* GetName() const;

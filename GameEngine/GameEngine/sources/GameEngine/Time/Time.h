@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include <ctime>
 #include <chrono>
 
 
@@ -9,35 +10,78 @@ namespace Engine
 	class ENGINE_API Time
 	{
 	public:
-		static long long NowHours()
+		class ENGINE_API SinceStartup
 		{
-			return std::chrono::time_point_cast<std::chrono::hours>(Now()).time_since_epoch().count();
-		}
+		public:
+			/// <returns>
+			/// hours count since startup [0-...]
+			/// </returns>
+			static int Hours();
+			/// <returns>
+			/// minutes count since startup [0-...]
+			/// </returns>
+			static int Minutes();
+			/// <returns>
+			/// seconds count since startup [0-...]
+			/// </returns>
+			static long long Seconds();
+			/// <returns>
+			/// milliseconds count since startup [0-...]
+			/// </returns>
+			static long long Milliseconds();
+			/// <returns>
+			/// microseconds count since startup [0-...]
+			/// </returns>
+			static long long Microseconds();
+		};
 
-		static long long NowMinutes()
+		class ENGINE_API Actual
 		{
-			return std::chrono::time_point_cast<std::chrono::minutes>(Now()).time_since_epoch().count();
-		}
+		public:
+			/// <returns>
+			/// hours [0-23]
+			/// </returns>
+			static int Hours();
+			/// <returns>
+			/// minutes [0-59]
+			/// </returns>
+			static int Minutes();
+			/// <returns>
+			/// seconds [0-59]
+			/// </returns>
+			static int Seconds();
+			/// <returns>
+			/// milliseconds [0-999]
+			/// </returns>
+			static int Milliseconds();
+			/// <returns>
+			/// seconds [0-999]
+			/// </returns>
+			static int Microseconds();
+		};
 
-		static long long NowSeconds()
-		{
-			return std::chrono::time_point_cast<std::chrono::seconds>(Now()).time_since_epoch().count();
-		}
+		static std::chrono::high_resolution_clock::time_point GetTimePoint();
+	};
 
-		static long long NowMillis()
-		{
-			return std::chrono::time_point_cast<std::chrono::milliseconds>(Now()).time_since_epoch().count();
-		}
 
-		static long long NowMicros()
-		{
-			return std::chrono::time_point_cast<std::chrono::microseconds>(Now()).time_since_epoch().count();
-		}
-
-	private:
-		static std::chrono::time_point<std::chrono::high_resolution_clock> Now()
-		{
-			return std::chrono::high_resolution_clock::now();
-		}
+	class ENGINE_API Date
+	{
+	public:
+		/// <returns>
+		/// month day [1-31]
+		/// </returns>
+		static int Day();
+		/// <returns>
+		/// week day [1-7]
+		/// </returns>
+		static int WeekDay();
+		/// <returns>
+		/// month [1-12]
+		/// </returns>
+		static int Month();
+		/// <returns>
+		/// year [1900-...]
+		/// </returns>
+		static int Year();
 	};
 }
