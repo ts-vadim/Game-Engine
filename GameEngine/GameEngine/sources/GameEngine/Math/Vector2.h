@@ -5,7 +5,7 @@
 #include <math.h>
 
 
-class Vector2
+class ENGINE_API Vector2
 {
 public:
 	double x;

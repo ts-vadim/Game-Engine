@@ -14,6 +14,7 @@ namespace Engine
 
 	Application::~Application()
 	{
+		Close();
 	}
 
 	void Application::Run()

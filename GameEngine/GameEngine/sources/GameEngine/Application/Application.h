@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "Window/Window.h"
 #include <string>
 
 
