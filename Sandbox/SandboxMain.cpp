@@ -5,15 +5,11 @@
 #include <iostream>
 
 
-using namespace Engine;
-
-class MyApp : public Application
+class MyApp : public Engine::Application
 {
 public:
-	MyApp()
-		: Application("MyApp")
+	MyApp() : Application("MyApp")
 	{
-		ENGINE_TRACE("App \"%s\" created", GetName());
 	}
 
 	void Run()
@@ -30,6 +26,7 @@ public:
 				Engine::Time::Actual::Seconds(),
 				Engine::Time::Actual::Milliseconds()
 			);
+			Close();
 		}
 	}
 

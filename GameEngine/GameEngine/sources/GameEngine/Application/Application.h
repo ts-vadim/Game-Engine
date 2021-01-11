@@ -14,8 +14,8 @@ namespace Engine
 		virtual ~Application();
 		
 		virtual void Run();
-		void Close();
 
+		void Close();
 		void SetName(const char* name);
 		inline const char* GetName() const;
 
