@@ -8,12 +8,12 @@
 class WindowEvent : public EventBase
 {
 public:
-	enum class Action { None, Closed, Minimized, Resized, Moved, GainedFocus, LostFocus };
+	enum class Action { None, Closed, Minimized, Resized, Moved, GainedFocus, LostFocus, Unknown };
 
 public:
 	Action action = Action::None;
-	Vector2 newSize;
-	Vector2 newPosition;
+	unsigned int newSize[2] = { 0, 0 };
+	unsigned int newPosition[2] = { 0, 0 };
 	bool closed = false;
 	bool minimized = false;
 	bool hasFocus = false;
@@ -22,8 +22,10 @@ public:
 	WindowEvent(const WindowEvent& other)
 	{
 		action = other.action;
-		newSize = other.newSize;
-		newPosition = other.newPosition;
+		newSize[0] = other.newSize[0];
+		newSize[1] = other.newSize[1];
+		newPosition[0] = other.newPosition[0];
+		newPosition[1] = other.newPosition[1];
 		closed = other.closed;
 		minimized = other.minimized;
 		hasFocus = other.hasFocus;
@@ -32,8 +34,8 @@ public:
 	WindowEvent& operator=(const WindowEvent& other)
 	{
 		action = other.action;
-		newSize = other.newSize;
-		newPosition = other.newPosition;
+		newPosition[0] = other.newPosition[0];
+		newPosition[1] = other.newPosition[1];
 		closed = other.closed;
 		minimized = other.minimized;
 		hasFocus = other.hasFocus;

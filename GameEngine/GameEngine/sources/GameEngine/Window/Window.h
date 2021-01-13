@@ -40,12 +40,13 @@ namespace Engine
 	class ENGINE_API Window
 	{
 	public:
-		using EventCallback = std::function<void(WindowEvent&)>;
+		using EventCallback = std::function<void(WindowEvent)>;
 
 	public:
 		virtual ~Window() {}
 
 		virtual void Init() = 0;
+		virtual void Close() = 0;
 
 		virtual void OnUpdate() = 0;
 

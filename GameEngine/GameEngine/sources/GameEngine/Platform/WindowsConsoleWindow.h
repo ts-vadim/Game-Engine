@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Window/Window.h"
+#include "Event/WindowEvent.h"
 #include "Log/Log.h"
 #include <Windows.h>
 #include <string>
@@ -17,6 +18,7 @@ namespace Engine
 		~WindowsConsoleWindow();
 
 		void Init() override;
+		void Close() override;
 
 		void OnUpdate() override;
 
@@ -34,10 +36,13 @@ namespace Engine
 		EventCallback m_EventCallback;
 		WindowSettings m_WindowSettings;
 
-		HANDLE m_ConsoleHandle;
-		DWORD m_ConsoleMode;
+		HANDLE m_ConsoleScreenBuffer;
+		HANDLE m_ConsoleInputHandle;
 		DWORD m_SaveConsoleMode;
 		INPUT_RECORD m_InputRecord;
+
+	private:
+		void CreateWindowEvent(PINPUT_RECORD pInputRecord, WindowEvent& windowEvent);
 	};
 }
 

@@ -4,9 +4,9 @@
 namespace Engine
 {
 	const int Log::s_TimeBufferLength = 20;
-	const int Log::s_FilePosBufferLength = 100;
+	const int Log::s_FilePosBufferLength = 500;
 	const int Log::s_PrefixBufferLength = s_TimeBufferLength + s_FilePosBufferLength;
-	const int Log::s_MessageBufferLength = 200;
+	const int Log::s_MessageBufferLength = 1000;
 	const int Log::s_LogLevelMaxPadding = 11;
 	const int Log::s_TitleMaxPadding = 6;
 
