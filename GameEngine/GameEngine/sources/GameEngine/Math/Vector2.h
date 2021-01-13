@@ -50,7 +50,7 @@ public:
 
 	void Set(double x, double y);
 
-	int operator[](int index);
+	double operator[](int index);
 
 	bool operator==(const Vector2& other);
 	bool operator!=(const Vector2& other);

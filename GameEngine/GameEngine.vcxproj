@@ -46,14 +46,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>engine</TargetName>
-    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Configuration)-$(Platform)</OutDir>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(MProjectName)\$(Configuration)-$(Platform)\</IntDir>
     <IncludePath>$(ProjectDir)$(ProjectName)\sources\;$(ProjectDir)$(ProjectName)\vendor\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>engine</TargetName>
-    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Configuration)-$(Platform)</OutDir>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(MProjectName)\$(Configuration)-$(Platform)\</IntDir>
     <IncludePath>$(ProjectDir)$(ProjectName)\sources\;$(ProjectDir)$(ProjectName)\vendor\;$(IncludePath)</IncludePath>
   </PropertyGroup>
@@ -94,8 +94,12 @@
     <ClInclude Include="GameEngine\sources\GameEngine\Application\Application.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Core.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\EntryPoint.h" />
+    <ClInclude Include="GameEngine\sources\GameEngine\Event\EventBase.h" />
+    <ClInclude Include="GameEngine\sources\GameEngine\Event\WindowEvent.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Log\Log.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Math\Vector2.h" />
+    <ClInclude Include="GameEngine\sources\GameEngine\Platform\PlatformInfo.h" />
+    <ClInclude Include="GameEngine\sources\GameEngine\Platform\WindowsConsoleWindow.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Time\Time.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Time\Timer.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Window\Window.h" />
@@ -104,8 +108,10 @@
     <ClCompile Include="GameEngine\sources\GameEngine\Application\Application.cpp" />
     <ClCompile Include="GameEngine\sources\GameEngine\Log\Log.cpp" />
     <ClCompile Include="GameEngine\sources\GameEngine\Math\Vector2.cpp" />
+    <ClCompile Include="GameEngine\sources\GameEngine\Platform\WindowsConsoleWindow.cpp" />
     <ClCompile Include="GameEngine\sources\GameEngine\Time\Time.cpp" />
     <ClCompile Include="GameEngine\sources\GameEngine\Time\Timer.cpp" />
+    <ClCompile Include="GameEngine\sources\GameEngine\Window\Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

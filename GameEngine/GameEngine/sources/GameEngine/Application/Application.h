@@ -17,6 +17,7 @@ namespace Engine
 		virtual void Run();
 
 		void Close();
+
 		void SetName(const char* name);
 		inline const char* GetName() const;
 

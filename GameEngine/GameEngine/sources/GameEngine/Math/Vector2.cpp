@@ -81,7 +81,7 @@ void Vector2::Set(double p_x, double p_y)
 	y = p_y;
 }
 
-int Vector2::operator[](int index)
+double Vector2::operator[](int index)
 {
 	return (index) ? y : x;
 }

@@ -10,15 +10,15 @@ extern Engine::Application* Engine::CreateApplication();
 
 int main(int argc, char** argv)
 {
-    Engine::Timer timer;
+    //Engine::Timer timer;
 
-    timer.Reset();
+    //timer.Reset();
     auto app = Engine::CreateApplication();
-    ENGINE_CORE_INFO("Create App \"%s\": %fms", app->GetName(), timer.GetElapsedTimeMs());
+    //ENGINE_CORE_INFO("Create App \"%s\": %fms", app->GetName(), timer.GetElapsedTimeMs());
 
     app->Run();
 
-    timer.Reset();
+    //timer.Reset();
     delete app;
-    ENGINE_CORE_INFO("Destroy App: %fms", timer.GetElapsedTimeMs());
+    //ENGINE_CORE_INFO("Destroy App: %fms", timer.GetElapsedTimeMs());
 }
