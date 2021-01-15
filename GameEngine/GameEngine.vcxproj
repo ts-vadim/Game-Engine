@@ -70,6 +70,9 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)bin\GameEngine\$(Configuration)-$(Platform)\engine.dll" "$(SolutionDir)bin\Sandbox\$(Configuration)-$(Platform)\engine.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -88,17 +91,18 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)bin\GameEngine\$(Configuration)-$(Platform)\engine.dll" "$(SolutionDir)bin\Sandbox\$(Configuration)-$(Platform)\engine.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine\sources\GameEngine.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Application\Application.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Core.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\EntryPoint.h" />
-    <ClInclude Include="GameEngine\sources\GameEngine\Event\EventBase.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Event\WindowEvent.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Log\Log.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Math\Vector2.h" />
-    <ClInclude Include="GameEngine\sources\GameEngine\Platform\PlatformInfo.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Platform\WindowsConsoleWindow.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Time\Time.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Time\Timer.h" />

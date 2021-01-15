@@ -8,6 +8,15 @@
 #endif
 
 
+#if defined(_WIN32)
+	#define ENGINE_PLATFORM_WINDOWS
+#elif defined(__APPLE__)
+	#define ENGINE_PLATFORM_MAC
+#else
+	#define ENGINE_PLATFORM_UNIX
+#endif
+
+
 #define ENGINE_FUNC_SIG __FUNCTION__ 
 #define ENGINE_FILE_SIG __FILE__
 #define ENGINE_LINE_SIG __LINE__

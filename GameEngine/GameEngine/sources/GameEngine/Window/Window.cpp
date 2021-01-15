@@ -6,11 +6,10 @@ namespace Engine
 {
 	Window* Window::Create(const WindowSettings& windowSettings)
 	{
+#ifdef ENGINE_PLATFORM_WINDOWS
 		return new WindowsConsoleWindow(windowSettings);
-//#ifdef PLATFORM_WINDOWS
-//		return new WindowsWindow(windowSettings);
-//#else
-//#error No platform-specific Window implementation available
-//#endif
+#else
+#error Only Windows platform is supported
+#endif
 	}
 }

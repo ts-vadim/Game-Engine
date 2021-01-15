@@ -33,22 +33,48 @@ private:
 
 	static void EventHandler(WindowEvent windowEvent)
 	{
-		switch (windowEvent.action)
+		switch (windowEvent.eventType)
 		{
-		case WindowEvent::Action::Resized:
-			ENGINE_TRACE("Event type: RESIZED. new size: %d,%d", windowEvent.newSize[0], windowEvent.newSize[1]);
+		case WindowEvent::EventType::WindowResized:
+			ENGINE_TRACE("Resized. new size: %d,%d", windowEvent.sizeEvent.width, windowEvent.sizeEvent.height);
 			break;
 
-		case WindowEvent::Action::GainedFocus:
-			ENGINE_TRACE("Event type: GAINEDFOCUS");
+		case WindowEvent::EventType::WindowGainedFocus:
+			ENGINE_TRACE("Gained focus");
 			break;
 
-		case WindowEvent::Action::LostFocus:
-			ENGINE_TRACE("Event type: LOSTFOCUS");
+		case WindowEvent::EventType::WindowLostFocus:
+			ENGINE_TRACE("Lost focus");
+			break;
+
+		case WindowEvent::EventType::KeyPressed:
+			ENGINE_TRACE("Key pressed. scan code: %d", windowEvent.keyEvent.scanCode);
+			ENGINE_TRACE(
+				"shift pressed: %d, ctrl pressed: %d, alt pressed: %d",
+				windowEvent.keyEvent.shiftPressed,
+				windowEvent.keyEvent.ctrlPressed,
+				windowEvent.keyEvent.altPressed
+			);
+			break;
+
+		case WindowEvent::EventType::KeyReleased:
+			ENGINE_TRACE("Key released. scan code: %d", windowEvent.keyEvent.scanCode);
+			break;
+
+		case WindowEvent::EventType::MouseMoved:
+			ENGINE_TRACE("Mouse moved. position: %d,%d", windowEvent.mouseMove.x, windowEvent.mouseMove.y);
+			break;
+
+		case WindowEvent::EventType::MouseButtonPressed:
+			ENGINE_TRACE("Mouse pressed. button: %d", windowEvent.mouseButton.button);
+			break;
+
+		case WindowEvent::EventType::MouseButtonReleased:
+			ENGINE_TRACE("Mouse released. button: %d", windowEvent.mouseButton.button);
 			break;
 
 		default:
-			ENGINE_TRACE("Event type: other");
+			ENGINE_TRACE("other event");
 			break;
 		}
 	}

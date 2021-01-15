@@ -10,10 +10,8 @@
     <ClInclude Include="GameEngine\sources\GameEngine\Time\Time.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Window\Window.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Math\Vector2.h" />
-    <ClInclude Include="GameEngine\sources\GameEngine\Event\WindowEvent.h" />
-    <ClInclude Include="GameEngine\sources\GameEngine\Event\EventBase.h" />
     <ClInclude Include="GameEngine\sources\GameEngine\Platform\WindowsConsoleWindow.h" />
-    <ClInclude Include="GameEngine\sources\GameEngine\Platform\PlatformInfo.h" />
+    <ClInclude Include="GameEngine\sources\GameEngine\Event\WindowEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine\sources\GameEngine\Application\Application.cpp" />

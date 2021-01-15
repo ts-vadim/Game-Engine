@@ -1,44 +1,54 @@
 #pragma once
 
 #include "Core.h"
-#include "Event/EventBase.h"
-#include "Math/Vector2.h"
 
 
-class WindowEvent : public EventBase
+class ENGINE_API WindowEvent
 {
 public:
-	enum class Action { None, Closed, Minimized, Resized, Moved, GainedFocus, LostFocus, Unknown };
+	enum class EventType
+	{
+		Unknown,
+		WindowClosed, WindowResized, WindowGainedFocus, WindowLostFocus,
+		KeyPressed, KeyReleased,
+		MouseButtonPressed, MouseButtonReleased, MouseMoved
+	};
+
+	struct SizeEvent
+	{
+		unsigned int width;
+		unsigned int height;
+	};
+
+	struct KeyEvent
+	{
+		int keyCode;
+		int scanCode;
+		bool capslockPressed;
+		bool altPressed;
+		bool ctrlPressed;
+		bool shiftPressed;
+	};
+
+	struct MouseButtonEvent
+	{
+		int button;
+	};
+
+	struct MouseMoveEvent
+	{
+		int x;
+		int y;
+	};
 
 public:
-	Action action = Action::None;
-	unsigned int newSize[2] = { 0, 0 };
-	unsigned int newPosition[2] = { 0, 0 };
-	bool closed = false;
-	bool minimized = false;
-	bool hasFocus = false;
+	EventType eventType;
 
-	WindowEvent() {}
-	WindowEvent(const WindowEvent& other)
+	union
 	{
-		action = other.action;
-		newSize[0] = other.newSize[0];
-		newSize[1] = other.newSize[1];
-		newPosition[0] = other.newPosition[0];
-		newPosition[1] = other.newPosition[1];
-		closed = other.closed;
-		minimized = other.minimized;
-		hasFocus = other.hasFocus;
-	}
-
-	WindowEvent& operator=(const WindowEvent& other)
-	{
-		action = other.action;
-		newPosition[0] = other.newPosition[0];
-		newPosition[1] = other.newPosition[1];
-		closed = other.closed;
-		minimized = other.minimized;
-		hasFocus = other.hasFocus;
-		return *this;
-	}
+		SizeEvent sizeEvent;
+		KeyEvent keyEvent;
+		MouseButtonEvent mouseButton;
+		MouseMoveEvent mouseMove;
+	};
 };

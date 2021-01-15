@@ -42,7 +42,12 @@ namespace Engine
 		INPUT_RECORD m_InputRecord;
 
 	private:
-		void CreateWindowEvent(PINPUT_RECORD pInputRecord, WindowEvent& windowEvent);
+		void CreateWindowEvent(INPUT_RECORD& pInputRecord, WindowEvent& windowEvent);
+
+		void CreateFocusEvent(INPUT_RECORD& pInputRecord, WindowEvent& windowEvent);
+		void CreateResizeEvent(INPUT_RECORD& pInputRecord, WindowEvent& windowEvent);
+		void CreateMouseEvent(INPUT_RECORD& pInputRecord, WindowEvent& windowEvent);
+		void CreateKeyEvent(INPUT_RECORD& pInputRecord, WindowEvent& windowEvent);
 	};
 }
 
