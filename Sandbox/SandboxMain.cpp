@@ -13,7 +13,6 @@ public:
 	{
 		m_Window = (Engine::WindowsConsoleWindow*)Engine::Window::Create();
 		m_Window->Init();
-		m_Window->SetEventCallback(EventHandler);
 	}
 
 	~MyApp()
@@ -24,14 +23,20 @@ public:
 	void Run()
 	{
 		ENGINE_TRACE("Window handle: 0x%.8X", (long long)m_Window->GetSystemHandle());
+		WindowEvent event;
 		while (IsRunning())
+		{
 			m_Window->OnUpdate();
+			while (m_Window->PollEvent(event))
+				OnEvent(event);
+		}
+			
 	}
 
 private:
 	Engine::WindowsConsoleWindow* m_Window = nullptr;
 
-	static void EventHandler(WindowEvent windowEvent)
+	void OnEvent(WindowEvent windowEvent)
 	{
 		switch (windowEvent.eventType)
 		{
@@ -49,12 +54,6 @@ private:
 
 		case WindowEvent::EventType::KeyPressed:
 			ENGINE_TRACE("Key pressed. scan code: %d", windowEvent.keyEvent.scanCode);
-			ENGINE_TRACE(
-				"shift pressed: %d, ctrl pressed: %d, alt pressed: %d",
-				windowEvent.keyEvent.shiftPressed,
-				windowEvent.keyEvent.ctrlPressed,
-				windowEvent.keyEvent.altPressed
-			);
 			break;
 
 		case WindowEvent::EventType::KeyReleased:

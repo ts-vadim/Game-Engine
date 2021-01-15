@@ -6,6 +6,7 @@
 #include "Log/Log.h"
 #include <Windows.h>
 #include <string>
+#include <queue>
 
 
 namespace Engine
@@ -30,10 +31,10 @@ namespace Engine
 
 		void Resize(unsigned int width, unsigned int height);
 
-		void SetEventCallback(const EventCallback& callback) override;
+		bool PollEvent(WindowEvent& event) override;
 
 	private:
-		EventCallback m_EventCallback;
+		std::queue<WindowEvent> m_WindowEventQueue;
 		WindowSettings m_WindowSettings;
 
 		HANDLE m_ConsoleScreenBuffer;
@@ -42,12 +43,15 @@ namespace Engine
 		INPUT_RECORD m_InputRecord;
 
 	private:
-		void CreateWindowEvent(INPUT_RECORD& pInputRecord, WindowEvent& windowEvent);
+		bool ReadConsoleInputEvent(INPUT_RECORD& inputRecord);
 
+		void CreateWindowEvent(INPUT_RECORD& pInputRecord, WindowEvent& windowEvent);
 		void CreateFocusEvent(INPUT_RECORD& pInputRecord, WindowEvent& windowEvent);
 		void CreateResizeEvent(INPUT_RECORD& pInputRecord, WindowEvent& windowEvent);
 		void CreateMouseEvent(INPUT_RECORD& pInputRecord, WindowEvent& windowEvent);
 		void CreateKeyEvent(INPUT_RECORD& pInputRecord, WindowEvent& windowEvent);
+
+		void UpdateWindowSettings(WindowEvent& windowEvent);
 	};
 }
 

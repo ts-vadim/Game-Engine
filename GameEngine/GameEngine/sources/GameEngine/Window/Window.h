@@ -52,10 +52,9 @@ namespace Engine
 
 		inline virtual uint32_t GetWidth() const = 0;
 		inline virtual uint32_t GetHeight() const = 0;
+		inline virtual void* GetSystemHandle() const = 0;
 
-		virtual void* GetSystemHandle() const = 0;
-
-		virtual void SetEventCallback(const EventCallback& callback) = 0;
+		virtual bool PollEvent(WindowEvent& event) = 0;
 
 		/// <summary>
 		/// Creates platform-specific window instance

@@ -65,27 +65,15 @@ namespace Engine
 
 	void WindowsConsoleWindow::OnUpdate()
 	{
-		DWORD unread_events_count;
-		if (!GetNumberOfConsoleInputEvents(m_ConsoleInputHandle, &unread_events_count))
-		{
-			ENGINE_CORE_ERROR("Failed to get unread console input events. Handle: 0x%.8X, Error: %ld", (long long)m_ConsoleInputHandle, GetLastError());
+		if (!ReadConsoleInputEvent(m_InputRecord))
 			return;
-		}
 
-		if (unread_events_count > 0)
-		{
-			DWORD events_count;
-			if (!ReadConsoleInputA(m_ConsoleInputHandle, &m_InputRecord, 1, &events_count))
-			{
-				ENGINE_CORE_ERROR("Failed to read console input. Error: %ld", GetLastError());
-				return;
-			}
-			
-			WindowEvent windowEvent;
-			CreateWindowEvent(m_InputRecord, windowEvent);
-			if (m_EventCallback)
-				m_EventCallback(windowEvent);
-		}
+		WindowEvent windowEvent;
+		CreateWindowEvent(m_InputRecord, windowEvent);
+
+		UpdateWindowSettings(windowEvent);
+		
+		m_WindowEventQueue.push(windowEvent);
 	}
 
 	std::string WindowsConsoleWindow::GetTitle() const
@@ -114,9 +102,36 @@ namespace Engine
 			ENGINE_CORE_ERROR("Failed to resize console. Handle: %d, Size: %d,%d, ErrorCode: %ld", m_ConsoleScreenBuffer, width, height, GetLastError());
 	}
 
-	void WindowsConsoleWindow::SetEventCallback(const EventCallback& callback)
+	bool WindowsConsoleWindow::PollEvent(WindowEvent& event)
 	{
-		m_EventCallback = callback;
+		if (m_WindowEventQueue.empty())
+			return false;
+		
+		event = m_WindowEventQueue.front();
+		m_WindowEventQueue.pop();
+		return true;
+	}
+
+	bool WindowsConsoleWindow::ReadConsoleInputEvent(INPUT_RECORD& inputRecord)
+	{
+		DWORD unread_events_count;
+		if (!GetNumberOfConsoleInputEvents(m_ConsoleInputHandle, &unread_events_count))
+		{
+			ENGINE_CORE_ERROR("Failed to get unread console input events. Handle: 0x%.8X, Error: %ld", (long long)m_ConsoleInputHandle, GetLastError());
+			return false;
+		}
+
+		if (unread_events_count <= 0)
+			return false;
+		
+		DWORD events_count;
+		if (!ReadConsoleInputA(m_ConsoleInputHandle, &inputRecord, 1, &events_count))
+		{
+			ENGINE_CORE_ERROR("Failed to read console input. Error: %ld", GetLastError());
+			return false;
+		}
+
+		return true;
 	}
 
 	void WindowsConsoleWindow::CreateWindowEvent(INPUT_RECORD& inputRecord, WindowEvent& windowEvent)
@@ -143,8 +158,6 @@ namespace Engine
 			windowEvent.eventType = WindowEvent::EventType::Unknown;
 			break;
 		}
-
-		
 	}
 
 	void WindowsConsoleWindow::CreateFocusEvent(INPUT_RECORD& inputRecord, WindowEvent& windowEvent)
@@ -220,5 +233,23 @@ namespace Engine
 			(LEFT_CTRL_PRESSED | RIGHT_CTRL_PRESSED);
 		windowEvent.keyEvent.shiftPressed = inputRecord.Event.KeyEvent.dwControlKeyState & SHIFT_PRESSED;
 		windowEvent.keyEvent.capslockPressed = inputRecord.Event.KeyEvent.dwControlKeyState & CAPSLOCK_ON;
+	}
+
+	void WindowsConsoleWindow::UpdateWindowSettings(WindowEvent& windowEvent)
+	{
+		if (windowEvent.eventType == WindowEvent::EventType::WindowResized)
+		{
+			m_WindowSettings.width = windowEvent.sizeEvent.width;
+			m_WindowSettings.height = windowEvent.sizeEvent.height;
+		}
+
+		static char titleTemp[200];
+		int charsWritten = GetConsoleTitleA(titleTemp, 200);
+		if (charsWritten == 0)
+		{
+			ENGINE_CORE_ERROR("Failed to get console title. Error: %ld", GetLastError());
+			return;
+		}
+		m_WindowSettings.title.assign(titleTemp);
 	}
 }// namespace Engine
