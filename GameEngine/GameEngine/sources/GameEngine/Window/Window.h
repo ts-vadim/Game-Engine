@@ -40,9 +40,6 @@ namespace Engine
 	class ENGINE_API Window
 	{
 	public:
-		using EventCallback = std::function<void(WindowEvent)>;
-
-	public:
 		virtual ~Window() {}
 
 		virtual void Init() = 0;
@@ -50,6 +47,9 @@ namespace Engine
 
 		virtual void OnUpdate() = 0;
 
+		virtual void SetTitle(const std::string& title) = 0;
+
+		inline virtual std::string GetTitle() const = 0;
 		inline virtual uint32_t GetWidth() const = 0;
 		inline virtual uint32_t GetHeight() const = 0;
 		inline virtual void* GetSystemHandle() const = 0;

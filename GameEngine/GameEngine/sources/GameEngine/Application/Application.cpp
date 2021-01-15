@@ -19,6 +19,7 @@ namespace Engine
 
 	void Application::Run()
 	{
+		ENGINE_CORE_WARN("Application::Run() not implemented. Application runs empty mainloop.");
 		while (m_Running);
 	}
 
@@ -40,6 +41,10 @@ namespace Engine
 	bool Application::IsRunning() const
 	{
 		return m_Running;
+	}
+
+	void Application::OnEvent(Window* pWindow, WindowEvent& event)
+	{
 	}
 }
 

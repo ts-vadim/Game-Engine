@@ -13,6 +13,7 @@ public:
 	{
 		m_Window = (Engine::WindowsConsoleWindow*)Engine::Window::Create();
 		m_Window->Init();
+		m_Window->SetActiveWindowBuffer(false);
 	}
 
 	~MyApp()
@@ -30,7 +31,6 @@ public:
 			while (m_Window->PollEvent(event))
 				OnEvent(event);
 		}
-			
 	}
 
 private:
@@ -58,6 +58,13 @@ private:
 
 		case WindowEvent::EventType::KeyReleased:
 			ENGINE_TRACE("Key released. scan code: %d", windowEvent.keyEvent.scanCode);
+			if (windowEvent.keyEvent.keyCode == ' ')
+			{
+				bool active = !m_Window->IsWindowBufferActive();
+				m_Window->SetActiveWindowBuffer(active);
+				m_Window->SetTitle((active) ? "Screen buffer" : "Defult screen buffer");
+				ENGINE_TRACE("Screen buffer %s", (active) ? "active" : "not active");
+			}
 			break;
 
 		case WindowEvent::EventType::MouseMoved:

@@ -21,9 +21,16 @@ namespace Engine
 		void Init() override;
 		void Close() override;
 
+		
+
+		void SetActiveWindowBuffer(bool active);
+		bool IsWindowBufferActive();
+
 		void OnUpdate() override;
 
-		std::string GetTitle() const;
+		void SetTitle(const std::string& title) override;
+
+		std::string GetTitle() const override;
 		inline uint32_t GetWidth() const override;
 		inline uint32_t GetHeight() const override;
 
@@ -41,6 +48,8 @@ namespace Engine
 		HANDLE m_ConsoleInputHandle;
 		DWORD m_SaveConsoleMode;
 		INPUT_RECORD m_InputRecord;
+
+		bool m_ScreenBufferActive = false;
 
 	private:
 		bool ReadConsoleInputEvent(INPUT_RECORD& inputRecord);

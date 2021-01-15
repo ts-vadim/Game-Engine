@@ -46,11 +46,7 @@ namespace Engine
 			while (true);
 		}
 
-		/*if (!SetConsoleActiveScreenBuffer(m_ConsoleScreenBuffer))
-		{
-			ENGINE_CORE_ERROR("Failed to set active console buffer. Error: %ld", GetLastError());
-			while (true);
-		}*/
+		SetActiveWindowBuffer(true);
 
 		ENGINE_CORE_INFO("New WindowsConsoleWindow created.");
 	}
@@ -61,6 +57,21 @@ namespace Engine
 			ENGINE_CORE_ERROR("Failed to close console handle. Error: %ld", GetLastError());
 		if (!SetConsoleMode(m_ConsoleInputHandle, m_SaveConsoleMode))
 			ENGINE_CORE_ERROR("Failed to set saved input mode. Error: %ld", GetLastError());
+	}
+
+	void WindowsConsoleWindow::SetActiveWindowBuffer(bool active)
+	{
+		if (!SetConsoleActiveScreenBuffer((active) ? m_ConsoleScreenBuffer : GetStdHandle(STD_OUTPUT_HANDLE)))
+		{
+			ENGINE_CORE_ERROR("Failed to set active console buffer. Error: %ld", GetLastError());
+			return;
+		}
+		m_ScreenBufferActive = active;
+	}
+
+	bool WindowsConsoleWindow::IsWindowBufferActive()
+	{
+		return m_ScreenBufferActive;
 	}
 
 	void WindowsConsoleWindow::OnUpdate()
@@ -74,6 +85,16 @@ namespace Engine
 		UpdateWindowSettings(windowEvent);
 		
 		m_WindowEventQueue.push(windowEvent);
+	}
+
+	void WindowsConsoleWindow::SetTitle(const std::string& title)
+	{
+		if (!SetConsoleTitleA(title.c_str()))
+		{
+			ENGINE_CORE_ERROR("Failed to set window title. Error: %ld", GetLastError());
+			return;
+		}
+		m_WindowSettings.title = title;
 	}
 
 	std::string WindowsConsoleWindow::GetTitle() const
